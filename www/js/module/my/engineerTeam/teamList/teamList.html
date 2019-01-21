@@ -1,0 +1,48 @@
+<ion-view view-title="{{teamName}}" style="background-color: #EEEEEE">
+  <ion-content >
+    <div class="list listStyle" ng-show="groupInfo.user.id == userInfo.id && workstate != 4">
+      <div class="item personalBox2 mySkills engineerTeam4" ng-repeat="itme in informList track by $index" ng-click="detailList(itme.id)">
+        <span ng-bind="itme.name"></span>
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+    </div>
+    <h3 class="mySkills-1 engineerTeam2" >班组成员(审核通过人员)</h3>
+    <div class="myTeam myTeam2" ng-click="memberData(groupInfo.user.id)">
+      <div class="myTeam-1">
+        <div class="myTeam-img">
+          <img ng-src="{{groupInfo.user.avatar}}" >
+        </div>
+        <div class="myTeam-p">
+          <div class="myTeam-p1">
+            <span ng-bind="groupInfo.user.name"></span>
+            <span class="myTeam-span myTeam-span2">班组长</span>
+          </div>
+          <div class="myTeam-p1 myTeam-p2">
+            <span ng-bind="groupInfo.user.mobile"></span>
+            <span class="myTeam-span myTeam-span3">进场: <b>{{groupInfo.createDate | date:"yyyy-MM-dd"}}</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="myTeam myTeam2" ng-click="memberData(userInfo.id)" ng-repeat="userInfo in userInfoList track by $index">
+      <div class="myTeam-1">
+        <div class="myTeam-img">
+          <img ng-src="{{userInfo.avatar}}" >
+        </div>
+        <div class="myTeam-p">
+          <div class="myTeam-p1">
+            <span ng-bind="userInfo.name"></span>
+          </div>
+          <div class="myTeam-p1 myTeam-p2">
+            <span ng-bind="userInfo.mobile"></span>
+            <span class="myTeam-span myTeam-span3">进场: <b>{{userInfo.addTime | date:"yyyy-MM-dd"}}</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+
+</ion-view>
+
+

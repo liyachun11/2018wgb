@@ -1,0 +1,77 @@
+<ion-view view-title="培训详情" style="background-color: #EEEEEE">
+  <ion-content >
+    <div class="row row2">
+      <div class="col">
+        <div class="col-demo col-demo2">作业员</div>
+      </div>
+      <div class="col col-67">
+        <div class="col-demo" ng-bind="recordInfo.personname"></div>
+      </div>
+    </div>
+    <div class="row row2">
+      <div class="col">
+        <div class="col-demo col-demo2">工种</div>
+      </div>
+      <div class="col col-67">
+        <div class="col-demo">钢筋工</div>
+      </div>
+    </div>
+    <div class="row row2">
+      <div class="col">
+        <div class="col-demo col-demo2">类别</div>
+      </div>
+      <div class="col col-67">
+        <div class="col-demo">
+            <span ng-show="recordInfo.teachtype == 1">现场安全</span>
+            <span ng-show="recordInfo.teachtype == 2">政策法规</span>
+            <span ng-show="recordInfo.teachtype == 3">职业教育</span>
+            <span ng-show="recordInfo.teachtype == 4">学历教育</span>
+        </div>
+      </div>
+    </div>
+    <div class="row row2">
+      <div class="col">
+        <div class="col-demo col-demo2">教育时间</div>
+      </div>
+      <div class="col col-67">
+        <div class="col-demo">{{recordInfo.teachtime | date:"yyyy-MM-dd"}}</div>
+      </div>
+    </div>
+    <div class="row row2">
+      <div class="col">
+        <div class="col-demo col-demo2">上岗证号</div>
+      </div>
+      <div class="col col-67">
+        <div class="col-demo" ng-bind="recordInfo.worklicense"></div>
+      </div>
+    </div>
+    <div class="row row2">
+      <div class="col">
+        <div class="col-demo col-demo2">工程队名称</div>
+      </div>
+      <div class="col col-67">
+        <div class="col-demo" ng-bind="recordInfo.projectteam"></div>
+      </div>
+    </div>
+    <div class="row row2">
+      <div class="col">
+        <div class="col-demo col-demo2">班组</div>
+      </div>
+      <div class="col col-67">
+        <div class="col-demo" ng-bind="recordInfo.team"></div>
+      </div>
+    </div>
+    <div class="row row2">
+      <div class="col">
+        <div class="col-demo col-demo2">成绩</div>
+      </div>
+      <div class="col col-67">
+        <div class="col-demo" ng-bind="recordInfo.score"></div>
+      </div>
+    </div>
+
+
+  </ion-content>
+</ion-view>
+
+

@@ -1,0 +1,50 @@
+<ion-view view-title="培训" style="background-color: #EEEEEE">
+  <div class="bar bar-subheader" style="border: 0;">
+    <div class="myTrain">
+      <div class="myTrain-1" style="border: 0;">
+        <input type="text" ng-model="categoryInfo.educationTime" placeholder="教育时间">
+        <ionic-datepicker class="timeDate_box" idate="currentDate" callback="datePickerCallback_firstDate" title="dateTitle">
+          <button class="button button-small button-positive"></button>
+        </ionic-datepicker>
+        <i class="ion-ios-arrow-down myTrain-i"></i>
+      </div>
+      <div class="information-tier information-tierp-p myTrain-select" style="border: 0;">
+        <select ng-options="category.id as category.value for category in categoryList" ng-model="categoryInfo.id" style="color: #AAA;">
+          <option value="">教育类型</option>
+        </select>
+        <i class="ion-ios-arrow-down"></i>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="button button-small button-balanced myTrain_btn" ng-click="searchRecord()">搜索</button>
+    </div>
+  </div>
+  <ion-content style="margin-top: 8px; " >
+    <div class="list listStyle bar-subheader">
+      <ul class="myTrain-cont"  ng-repeat="item in educationRecordList track by $index" ng-click="myTrainDetail(item.ideducationid)">
+        <li>
+          <span class="myTrain-cont1" ng-bind="item.personname"></span>
+          <span >
+            <span ng-show="item.teachtype == 1">现场安全</span>
+            <span ng-show="item.teachtype == 2">政策法规</span>
+            <span ng-show="item.teachtype == 3">职业教育</span>
+            <span ng-show="item.teachtype == 4">学历教育</span>
+          </span>
+        </li>
+        <li>
+          <span class="myTrain-cont2" ng-bind="item.projectteam"></span>
+          <span class="myTrain-cont3" >{{item.score}}分</span>
+        </li>
+        <li>{{item.teachtime | date:"yyyy-MM-dd"}}</li>
+      </ul>
+    </div>
+    <div class="reder_zanwu" ng-show="educationRecordList.length == 0">
+      <img src="./././img/zanwushuju.png">
+      <h3 style="text-align: center;font-size:16px;">暂无数据</h3>
+    </div>
+
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

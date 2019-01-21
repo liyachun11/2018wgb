@@ -1,0 +1,60 @@
+<ion-view view-title="添加成员" style="background-color: #EEEEEE">
+  <div class="bar bar-subheader" style="background-color: #EEEEEE">
+    <div class="mem-search">
+      <input type="text" placeholder="请输入姓名或手机号搜索" id="key_word" ng-model="searchInfo.phoneAndName" ng-change="searchInfoChange()">
+      <i class="ion-search" ng-click="searchUsers()"></i>
+    </div>
+  </div>
+  <ion-content class="has-subheader">
+    <div class="list " style="margin-bottom: 10px;">
+      <div class="item personalBox2 mySkills" ng-click="workTypeBtn()">
+        工种
+        <i class="icon ion-ios-arrow-right"></i>
+        <span style="float: right;color: #333; margin-right: 5px;" ng-show="$root.workType.name">{{$root.workType.name}}</span>
+      </div>
+      <div class="item carInput carInput1">
+        <span>进场日期 <b style="font-size: 12px;color: red;font-weight: normal">(必填)</b></span>
+        <input type="text" ng-model="first_register_date" placeholder="请选择日期">
+        <ionic-datepicker class="timeDate_box" idate="currentDate" callback="datePickerCallback_firstDate" title="dateTitle">
+          <button class="button button-small button-positive"> {{ carInfo.registerTime }} </button>
+        </ionic-datepicker>
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+      <div class="item personalBox2 mySkills" style="padding: 10px;">
+        <div class="information-tier2" style="left: 10px;right: auto;">
+          <select ng-options="team.id as team.name for team in myTeamList" ng-model="searchInfo.teamId" ng-change="getTeamsByCaptainId()"></select>
+          <i class="ion-ios-arrow-down"></i>
+        </div>
+        <button class="button button-balanced button-small  " style="float: right" ng-click="selectAll()" ng-show="!isCheckAll">全选</button>
+        <button class="button button-balanced button-small  " style="float: right" ng-click="cancelAll()" ng-show="isCheckAll">取消</button>
+      </div>
+    </div>
+    <div class="list">
+      <div class="item item-checkbox  deleteMember" ng-repeat="userInfo in userInfoList track by $index">
+        <label class="checkbox">
+          <input type="checkbox" class="chkItem" name="chkItem" ng-value="userInfo.id" ng-click="changeChecked()" ng-if="userInfo.response == 'undefined' || userInfo.response == null || userInfo.response == 2">
+        </label>
+        <img ng-src="{{userInfo.avatar}}">
+        <div style="width: 78%;" class="deleteMember2">
+          <h2 ng-bind="userInfo.name"></h2>
+          <p ng-bind="userInfo.mobile"></p>
+        </div>
+        <div class="captainChange">
+          <span class="memberList1" style="background: #3EA949;" ng-show="userInfo.response == 0">邀请中</span>
+          <span class="memberList1" style="background: #3EA949;" ng-show="userInfo.response == 3">待审核</span>
+          <span class="memberList1" style="background: #9E9698;" ng-show="userInfo.response == 1">已邀请</span>
+        </div>
+      </div>
+
+    </div>
+
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+  <!--上拉加载-->
+  <ion-footer-bar>
+    <button  class="button button-balanced sublime-btn" ng-click="addInvitations()">确认({{addUserList.length}})</button>
+  </ion-footer-bar>
+</ion-view>
+
+

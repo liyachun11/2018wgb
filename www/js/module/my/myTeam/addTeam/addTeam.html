@@ -1,0 +1,27 @@
+<ion-view view-title="创建团队" style="background-color: #EEEEEE">
+  <ion-nav-bar>
+    <ion-nav-back-button class="button-clear" style="color: #333;" ng-click="goBackBtn()">
+      <i class="ion-chevron-left"></i> 返回
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content >
+    <div class="list listStyle">
+      <label class="item item-input" style="padding-left: 10px;">
+        <span class="input-label" style="width: 26%">团队名称：</span>
+        <input type="text" name="name" ng-model="teamInfo.title" placeholder="请输入团队名称">
+      </label>
+    </div>
+    <h3 class="mySkills-1">团队介绍</h3>
+    <textarea class="addTeam-textarea" maxlength="200"  ng-model="teamInfo.description" placeholder="请输入团队介绍"></textarea>
+    <div class="addTeam-num">
+      <span>{{teamInfo.description.length}} / 200</span></span>
+    </div>
+
+  </ion-content>
+  <ion-footer-bar>
+    <button class="button button-balanced sublime-btn"  ng-click="addTeam()">提交</button>
+  </ion-footer-bar>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

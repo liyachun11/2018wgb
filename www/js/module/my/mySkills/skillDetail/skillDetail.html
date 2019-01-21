@@ -1,0 +1,56 @@
+<ion-view view-title="技能编辑" style="background-color: #EEEEEE">
+  <ion-content >
+    <div class="list listStyle list_padding">
+      <!--<div class="item personalBox2 mySkills" ng-click="workTypeBtn()">-->
+        <!--<span ng-show="$root.workType.name">{{$root.workType.name}}</span>-->
+        <!--<span ng-show="!$root.workType.name">{{skillInfo.workType.name}}</span>-->
+        <!--<i class="icon ion-ios-arrow-right"></i>-->
+      <!--</div>-->
+      <div class="item personalBox2 mySkills list_border" ng-click="workTypeBtn()">
+        工种
+        <i class="icon ion-ios-arrow-right"></i>
+        <span style="float: right;color: #333; margin-right: 5px;"  ng-show="$root.workType.name">{{$root.workType.name}}</span>
+        <span style="float: right;color: #333; margin-right: 5px;" ng-show="!$root.workType.name">{{skillInfo.workType.name}}</span>
+      </div>
+      <div class="item carInput carInput1 list_border">
+        <span>有效期至</span>
+        <input type="text" ng-model="skillInfo.validityDate" placeholder="请选择有效期至">
+        <ionic-datepicker class="timeDate_box" idate="currentDate" callback="datePickerCallback_firstDate" title="dateTitle">
+          <button class="button button-small button-positive"></button>
+        </ionic-datepicker>
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+      <div class="item carInput list_border">
+        <span>证书名称</span>
+        <input type="text"  placeholder="请输入证书名称" ng-model="skillInfo.name">
+      </div>
+      <div class="item carInput list_border" style="border: 0;">
+        <span>证书号码</span>
+        <input type="text"  placeholder="请输入证书号码" ng-model="skillInfo.number">
+      </div>
+    </div>
+    <h3 class="mySkills-1">证书</h3>
+    <div class="mySkillsImg addSkillImg" id="addPush">
+      <div class="addSkillNum">
+        <span class="addSkill-left">图片上传</span>
+        <span>{{thumbReplyImgLength}}/5</span>
+      </div>
+
+      <div class="group-reply-upload-images padding-left">
+        <div compile="replyHTML" style="display: inline-block;"></div>
+        <div class="group-reply-image-item" ng-if="thumbReplyImgLength < 5">
+          <img src="./././img/img-plus.png">
+          <input type="file" accept="image/*"  onchange="angular.element(this).scope().selectImgChanged(this.files)"/>
+        </div>
+      </div>
+
+    </div>
+
+  </ion-content>
+  <ion-footer-bar>
+    <button  class="button button-balanced sublime-btn" ng-click="updateSkill()" ng-disable="btnDisabed">提交</button>
+  </ion-footer-bar>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

@@ -1,0 +1,60 @@
+<ion-view view-title="工程队详情" style="background-color: #EEEEEE">
+  <ion-content >
+    <div class="list_padding" style="background-color: #fff;">
+      <div class="row row2">
+        <div class="col col-20 row2col">
+          <div class="col-demo col-demo2">工程队</div>
+        </div>
+        <div class="col col-80">
+          <div class="col-demo" ng-bind="projectTeamInfo.name"></div>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="col col-20 row2col">
+          <div class="col-demo col-demo2">企业</div>
+        </div>
+        <div class="col col-80">
+          <div class="col-demo" ng-bind="projectTeamInfo.groupname"></div>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="col col-20 row2col">
+          <div class="col-demo col-demo2">地点</div>
+        </div>
+        <div class="col col-80">
+          <div class="col-demo" ng-bind="projectTeamInfo.address"></div>
+        </div>
+      </div>
+      <div class="row  row2">
+        <div class="col row2col col-20">
+          <div class="col-demo col-demo2">时间</div>
+        </div>
+        <div class="col col-80">
+          <div class="col-demo">
+            {{projectTeamInfo.planstarttime | date:"yyyy-MM-dd"}} - {{projectTeamInfo.planendtime | date:"yyyy-MM-dd"}}
+          </div>
+        </div>
+      </div>
+      <div class="row row2" style="border: 0;">
+        <div class="col col-20 row2col">
+          <div class="col-demo col-demo2">人数</div>
+        </div>
+        <div class="col col-80">
+          <div class="col-demo" ng-bind="projectTeamInfo.personno"></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mySkills-1">工程范围</h3>
+    <p class="engineerTeam-cont" >ddddddddff</p>
+    <div class="list listStyle" ng-show="userInfo.id == captainId && projectTeamInfo.state != 3">
+      <div class="item personalBox2 mySkills engineerTeam4" ng-click="teamChange()">
+        队长授权
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+    </div>
+  </ion-content>
+
+</ion-view>
+
+

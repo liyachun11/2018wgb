@@ -1,0 +1,43 @@
+<ion-view view-title="我的技能" style="background-color: #EEEEEE">
+  <ion-content >
+    <div class="list listStyle">
+      <div class="item personalBox2 mySkills" ng-click="addSkills()">
+        添加技能
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+    </div>
+    <h3 class="mySkills-1">已添加的技能</h3>
+    <div class="mySkills-2" ng-repeat="skill in skillList track by $index">
+      <div class="mySkills-2-1">
+        <div class="mySkills-2-2">
+          <span class="mySkillsSpan">{{skill.name | substring}}</span>
+          <span ng-bind="skill.name"></span>
+        </div>
+        <div class="mySkills-2-3">
+          <span>有效期:</span>
+          <!--<span>已过期:</span>-->
+          <span>{{skill.validityDate | date:"yyyy-MM-dd"}}</span>
+        </div>
+      </div>
+      <div class="mySkillsImg">
+        <img ng-src="{{path | httpFilter}}" ng-repeat="path in skill.picture track by $index" style="width: 65px;height: 65px;margin-bottom: 6px;" ng-click="loadBigImg(path)">
+      </div>
+      <div class="mySkillDelet">
+        <span ng-click="delteSkill(skill.id)"><i class="ion-ios-trash"></i>删除</span>
+        <span class="mySkillDelet-i" ng-click="skillDetail(skill.id)"><i class="ion-ios-compose"></i>编辑</span>
+      </div>
+    </div>
+    <!--图片放大-->
+    <script id="BigImg.html" type="text/ng-template">
+      <ion-scroll zooming="true" direction="xy" max-zoom = "10" min-zoom="1" scrollbar-y="false" scrollbar-x="false">
+        <div class="group-bigImage-box" ng-click="closeBigImg();">
+          <img ng-src="{{curImg | httpFilter}}">
+        </div>
+      </ion-scroll>
+    </script>
+
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

@@ -1,0 +1,57 @@
+<ion-view view-title="工程详情" style="background-color: #EEEEEE">
+  <ion-content >
+    <div class="padding_row">
+      <div class="row row2">
+        <div class="col col-20 row2col">
+          <div class="col-demo col-demo2">工程队</div>
+        </div>
+        <div class="col col-80">
+          <div class="col-demo" ng-bind="projectTeamInfo.name"></div>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="col col-20 row2col">
+          <div class="col-demo col-demo2">企业</div>
+        </div>
+        <div class="col col-80">
+          <div class="col-demo" ng-bind="projectTeamInfo.groupname"></div>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="col col-20 row2col">
+          <div class="col-demo col-demo2">地点</div>
+        </div>
+        <div class="col col-80">
+          <div class="col-demo" ng-bind="projectTeamInfo.address"></div>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="col col-20 row2col">
+          <div class="col-demo col-demo2">时间</div>
+        </div>
+        <div class="col col-80">
+          <div class="col-demo">
+            {{projectTeamInfo.planstarttime | date:"yyyy-MM-dd"}} - {{projectTeamInfo.planendtime | date:"yyyy-MM-dd"}}
+          </div>
+        </div>
+      </div>
+      <div class="row row2" style="border: 0;">
+        <div class="col col-20 row2col">
+          <div class="col-demo col-demo2">人数</div>
+        </div>
+        <div class="col col-80">
+          <div class="col-demo" ng-bind="projectTeamInfo.personno"></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mySkills-1">工程范围</h3>
+    <p class="engineerTeam-cont" ng-bind="projectTeamInfo.jobscope"></p>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+  <ion-footer-bar ng-hide="workstate == 2 || workstate == 3 || workstate == 4 || workstate == 6">
+    <button class="button button-balanced sublime-btn" ng-click="invitationProject()">申请</button>
+  </ion-footer-bar>
+</ion-view>
+
+

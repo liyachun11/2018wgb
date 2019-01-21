@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <!--<base href="/">-->
+    <!--<link rel="manifest" href="manifest.json">-->
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+    <link href="https://cdn.bootcss.com/ionic/1.3.2/css/ionic.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="./././img/favicon.ico">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://jic.talkingdata.com/app/h5/v1?appid=47DEABA881EB4BE0AB37903223C558A6&vn=生产1.0&vc=1.0.0"></script>
+    <script data-main="js/main.js" defer async src="lib/require.js"></script>
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <!--<script src="lib/ionic/js/ionic.bundle.js"></script>-->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <!--<script src="cordova.js"></script>-->
+
+    <!-- your app's js -->
+    <!--<script src="js/app.js"></script>-->
+    <!--<script src="js/controllers.js"></script>-->
+    <!--<script src="js/services.js"></script>-->
+  </head>
+  <body>
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    <ion-nav-bar class="bar-stable ">
+      <ion-nav-back-button class="button-clear" style="color: #333;" >
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view></ion-nav-view>
+    <script id="login.html" type="text/ng-template">
+      <ion-modal-view ng-controller="login">
+        <ion-header-bar class="bar-positive">
+          <h1 class="title">登录</h1>
+          <a class="button button-small light" ng-click="closeLogin()">关闭</a>
+        </ion-header-bar>
+        <ion-content>
+          <ion-slide-box auto-play="true" does-continue="true" slide-interval="2000">
+            <ion-slide ng-repeat="slide in slideList track by $index">
+              <div><img style="width: 100%" ng-src="{{slide.imgUrl | httpFilter}}" alt=""></div>
+            </ion-slide>
+          </ion-slide-box>
+          <form class="loginFrom">
+            <ion-list>
+              <ion-item class="login">
+                <div class="login-add">
+                  <span>手机号</span>
+                  <input type="tel" name="phoneNum" style="width: 70%" placeholder="请输入手机号" ng-model="getcodeParam.userPhone"/>
+                </div>
+              </ion-item>
+              <ion-item class="login">
+                <div class="login-add login-add2">
+                  <span>验证码</span>
+                  <input type="tel" name="phoneCode" size="6" placeholder="短信验证码" ng-model="getcodeParam.userPhoneCode"/>
+                  <div class="login-add3 button button-outline button-positive" ng-click="loginCode()" ng-disabled="flag">{{paracont}}</div>
+                </div>
+              </ion-item>
+              <ion-item class="login"  ng-show="isIdCard">
+                <div class="login-add">
+                  <span>身份证号</span>
+                  <input type="text" name="identityId" style="width: 70%" placeholder="请输入身份证号" ng-model="getcodeParam.identityId"/>
+                </div>
+              </ion-item>
+              <ion-item class="login"  ng-show="isName">
+                <div class="login-add">
+                  <span>姓名</span>
+                  <input type="text" name="name" style="width: 70%" placeholder="请输入姓名" ng-model="getcodeParam.name"/>
+                </div>
+              </ion-item>
+              <ion-item class="login"  ng-show="isOnlyInnerReward">
+                <div class="login-add">
+                  <span style="color: red;">只有内部员工享受优惠价</span>
+                </div>
+              </ion-item>
+              <button class="button button-block button-positive login-btn" ng-click="submitForm()">
+                登录
+              </button>
+            </ion-list>
+          </form>
+        </ion-content>
+        <div ng-include="'toast.html'" ng-class="toastClass"></div>
+      </ion-modal-view>
+    </script>
+    <script id="loading.html" type="text/ng-template">
+      <!--<ion-spinner icon="bubbles" class="spinner-positive"></ion-spinner>-->
+      <ion-spinner icon="lines" class="spinner-calm"></ion-spinner>
+      <div><p>{{$root.loadHint}}</p></div>
+    </script>
+    <script id="toast.html" type="text/ng-template">
+      <div class="loading toast-loading">
+        <p class="padding toast-content">{{toastContent}}</p>
+      </div>
+    </script>
+  </body>
+</html>

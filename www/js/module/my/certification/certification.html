@@ -1,0 +1,67 @@
+<ion-view view-title="实名认证" hide-tabs="true">
+  <ion-nav-bar>
+    <ion-nav-back-button class="button-clear" style="color: #333;" ng-click="goBackBtn()">
+      <i class="ion-chevron-left"></i> 返回
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-nav-buttons side="right" >
+    <button class="button " ng-click="modify()" ng-if="modifyBut"  style="color: #33cd5f;border: 0;font-size: 15px;">
+      <span  >修改</span>
+    </button>
+    <button class="button " ng-click="certification()" ng-if="!modifyBut"  style="color: #33cd5f;border: 0;font-size: 15px;">
+      <span >保存</span>
+    </button>
+  </ion-nav-buttons>
+  <ion-content >
+    <div class="list listStyle listStyle2">
+      <label class="item item-input">
+        <span class="input-label" style="width: 26%">请完成实名认证：</span>
+        <button class="button button-outline button-balanced button-small" style="position: absolute;right: 10px;top: 8px;" ng-click="quickBtn()" ng-if="userInfo.authentication !== 1">快速认证</button>
+      </label>
+      <label class="item item-input">
+        <span class="input-label" style="width: 26%">真实姓名：</span>
+        <input type="text" ng-model="personInfo.name" style="background: white;" placeholder="请输入您的真实姓名"  ng-disabled="ngSelecte">
+      </label>
+      <label class="item item-input">
+        <span class="input-label" style="width: 26%">身份证号：</span>
+        <input type="text" ng-model="personInfo.idCard" style="background: white;" placeholder="请输入您的身份证号" ng-disabled="ngSelecte">
+      </label>
+    </div>
+    <div style="border: 4px solid #F0F0F0"></div>
+    <div class="certificationBox" >
+      <div class="certificationBox1" ng-repeat="itme in images.carImg track by $index">
+        <div class="certificationBox1-1">
+          <div class="certif-cell-l">
+            <img src="./././img/img-plus.png" ng-if="itme.paramFile == ''">
+            <img  class="carImgBox" ng-if="itme.paramFile !== ''" ng-src="{{itme.paramFile | httpFilter}}">
+            <input type="file" accept="image/*" onchange="angular.element(this).scope().selectImgChanged(this.files)" ng-click="bba($index)" ng-disabled="ngSelecte">
+          </div>
+          <p ng-bind="itme.name"></p>
+        </div>
+        <div class="certificationBox1-1">
+          <img ng-src="{{itme.paramFiles | httpFilter}}" >
+          <p ng-bind="itme.names"></p>
+        </div>
+      </div>
+    </div>
+    <script id="useAgreement.html" type="text/ng-template">
+      <div class="certificationBox1" >
+        <div class="certificationBox1-1">
+          <div class="certif-cell-l">
+            <img src="./././img/img-plus.png" ng-show="uploadfileImg1 == undefined">
+            <img ng-src="{{uploadfileImg1 | httpFilter}}" ng-show="uploadfileImg1 !== undefined" >
+            <input type="file" accept="image/jpg" onchange="angular.element(this).scope().selectImgChanged2(this.files)">
+          </div>
+          <p>请上传身份证正面照</p>
+        </div>
+      </div>
+    </script>
+  </ion-content>
+  <!--<ion-footer-bar>-->
+    <!--<button class="button button-balanced sublime-btn" ng-click="certification()" ng-show="userInfo.authentication == 0" style="width: 97%">认证</button>-->
+    <!--<button class="button button-balanced sublime-btn" ng-click="certification()" ng-show="userInfo.authentication == 1" style="width: 97%">保存修改</button>-->
+  <!--</ion-footer-bar>-->
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

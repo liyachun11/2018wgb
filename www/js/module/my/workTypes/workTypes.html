@@ -1,0 +1,19 @@
+<ion-view view-title="选择工种" hide-tabs="true">
+  <ion-content >
+    <div class="workType-cont">
+      <div class="workType-cont1 workTypeList{{list.id}}" ng-repeat="list in workTypeList track by $index">
+        <h4 ng-bind="list.typeWork"></h4>
+        <ul>
+          <li ng-repeat="item in list.types track by $index"  ng-bind="item.name" ng-click="workTypeLi($index,list.id)"></li>
+        </ul>
+      </div>
+    </div>
+  </ion-content>
+  <!--<ion-footer-bar class="workType-btns">-->
+    <!--<button class="button button-stable " ng-click="resetBtn()">重置</button>-->
+    <!--<button class="button button-balanced sublime-btn" ng-click="saveBtn()">确认</button>-->
+  <!--</ion-footer-bar>-->
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

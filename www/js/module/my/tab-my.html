@@ -1,0 +1,61 @@
+<ion-view view-title="我的" hide-back-button="true">
+  <ion-content >
+    <div class="list listStyle list_padding" ng-click="roleDate()">
+      <div class="item item-thumbnail-left tabMy tabMy-itme" >
+        <img ng-src="{{userInfo.avatar}}" style="left: 7px;">
+        <div class="tabMy1">
+          <h2 ng-bind="userInfo.name" ng-show="userInfo.name != ''"></h2>
+          <h2 ng-bind="userInfo.userNicename" ng-show="userInfo.name == '' || userInfo.name == null"></h2>
+          <h2 ng-show="userInfo.userNicename == ''">&nbsp;</h2>
+          <p ng-bind="userInfo.mobile"></p>
+        </div>
+        <i class="ion-ios-arrow-right tabMy3"></i>
+      </div>
+    </div>
+    <ul class="tabMy4">
+      <li ng-click="certification()">
+        <i class="icon ion-clipboard"></i>
+        <p ng-show="userInfo.authentication == 1">已认证</p>
+        <p ng-show="userInfo.authentication == 0">实名认证</p>
+      </li>
+      <li ng-click="mySkills()">
+        <i class="icon ion-settings" ></i>
+        <p>我的技能</p>
+      </li>
+      <li ng-click="myTeam()">
+        <i class="icon ion-ios-people"></i>
+        <p>我的团队</p>
+      </li>
+    </ul>
+    <div style="border: 4px solid #F0F0F0"></div>
+    <div class="list list_padding">
+      <div class="item item-icon-left tabMy-itme" ng-click="engineerTeam()">
+        <i class="icon ion-android-contacts tabMy-ic"></i>
+        工程队
+        <!--<span class="badge badge-assertive">1</span>    -->
+        <i class="ion-ios-arrow-right tabMy-icon"></i>
+      </div>
+      <div class="item item-icon-left tabMy-itme" ng-click="invitation()">
+        <i class="icon ion-ios-compose tabMy-ic"></i>
+        邀请确认
+        <span class="badge badge-assertive" ng-bind="inviteCount" ng-show="inviteCount > 0"></span>
+        <i class="ion-ios-arrow-right tabMy-icon"></i>
+      </div>
+      <div class="item item-icon-left tabMy-itme" ng-click="useHelp()">
+        <i class="icon ion-help-circled tabMy-ic"></i>
+        使用帮助
+        <i class="ion-ios-arrow-right tabMy-icon"></i>
+      </div>
+      <div class="item item-icon-left tabMy-itme" ng-click="feedBack()">
+        <i class="icon ion-email-unread tabMy-ic"></i>
+        意见反馈
+        <i class="ion-ios-arrow-right tabMy-icon"></i>
+      </div>
+
+    </div>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+
+</ion-view>
+
+

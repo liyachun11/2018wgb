@@ -1,0 +1,111 @@
+<ion-view view-title="邀请确认" style="background-color: #EEEEEE">
+  <div class="bar bar-subheader tabApplyBox">
+    <div class="tabApply " ng-class="{'appActive': istab1}" ng-click="tabApply(0)">团队邀请</div>
+    <div class="tabApply " ng-class="{'appActive': istab2}" ng-click="tabApply(1)">班组邀请</div>
+    <div class="tabApply" ng-class="{'appActive': istab3}" ng-click="tabApply(2)">工程队邀请</div>
+  </div>
+  <ion-content class="has-subheader">
+    <div ng-if="isConter1">
+      <div class="myTeam myTeam2 applyEnginerrList" ng-repeat="invite in inviteList track by $index">
+        <div class="myTeam-1">
+          <div class="myTeam-img">
+            <img ng-src="{{invite.applicant.avatar}}">
+          </div>
+          <div class="myTeam-p">
+            <div class="myTeam-p1">
+              <span><span style="color: #2DA239;margin-right: 3px" ng-bind="invite.applicant.name"></span> 邀请你加入</span>
+              <div class="myTeam-span" ng-show="invite.response == 0">
+                <span class=" myTeam-span2" ng-click="acceptTeam(invite)">同意</span>
+                <span class=" myTeam-span2 invitation-juj" ng-click="refuse(invite)">拒绝</span>
+              </div>
+              <div class="myTeam-span" ng-show="invite.response == 2">
+                <span class=" myTeam-span2 invitation-yjuj">已拒绝</span>
+              </div>
+              <div class="myTeam-span" ng-show="invite.response == 1">
+                <span class=" myTeam-span2 invitation-ytg">已通过</span>
+              </div>
+            </div>
+            <div class="myTeam-p1 myTeam-p2">
+              <span style="color: #2DA239" ng-bind="invite.team.name"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reder_zanwu" ng-show="inviteList.length == 0 || inviteList == 'undefined'">
+        <img src="./././img/zanwushuju.png">
+        <h3 style="text-align: center;font-size:16px;">暂无邀请数据</h3>
+      </div>
+    </div>
+
+    <div ng-if="isConter2">
+      <div class="myTeam myTeam2 applyEnginerrList" ng-repeat="invite in inviteList track by $index">
+        <div class="myTeam-1">
+          <div class="myTeam-img">
+            <img ng-src="{{invite.applicant.avatar}}">
+          </div>
+          <div class="myTeam-p">
+            <div class="myTeam-p1">
+              <span><span style="color: #2DA239;margin-right: 3px" ng-bind="invite.applicant.name"></span> 邀请你加入</span>
+              <div class="myTeam-span" ng-show="invite.response == 0">
+                <span class=" myTeam-span2" ng-click="acceptTeam2(invite)">同意</span>
+                <span class=" myTeam-span2 invitation-juj" ng-click="refuse2(invite)">拒绝</span>
+              </div>
+              <div class="myTeam-span" ng-show="invite.response == 2">
+                <span class=" myTeam-span2 invitation-yjuj">已拒绝</span>
+              </div>
+              <div class="myTeam-span" ng-show="invite.response == 1">
+                <span class=" myTeam-span2 invitation-ytg">已通过</span>
+              </div>
+              <div class="myTeam-span" ng-show="invite.response == 3">
+                <span class=" myTeam-span2 invitation-ytg">待审核</span>
+              </div>
+            </div>
+            <div class="myTeam-p1 myTeam-p2">
+              <span style="color: #2DA239" ng-bind="invite.group.name"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reder_zanwu" ng-show="inviteList.length == 0 || inviteList == 'undefined'">
+        <img src="./././img/zanwushuju.png">
+        <h3 style="text-align: center;font-size:16px;">暂无邀请数据</h3>
+      </div>
+    </div>
+
+    <div ng-if="isConter3">
+      <div class="myTeam myTeam2 applyEnginerrList" ng-repeat="invite in inviteList track by $index">
+        <div class="myTeam-1">
+          <div class="myTeam-img">
+            <img src="./././img/06.jpg">
+          </div>
+          <div class="myTeam-p">
+            <div class="myTeam-p1">
+              <span><span style="color: #2DA239;margin-right: 3px"></span> 邀请您加入</span>
+              <div class="myTeam-span" ng-show="invite.response == 0">
+                <span class=" myTeam-span2" ng-click="acceptTeam3(invite)">同意</span>
+                <span class=" myTeam-span2 invitation-juj" ng-click="refuse3(invite)">拒绝</span>
+              </div>
+              <div class="myTeam-span" ng-show="invite.response == 2">
+                <span class=" myTeam-span2 invitation-yjuj">已拒绝</span>
+              </div>
+              <div class="myTeam-span" ng-show="invite.response == 1">
+                <span class=" myTeam-span2 invitation-ytg">已通过</span>
+              </div>
+            </div>
+            <div class="myTeam-p1 myTeam-p2">
+              <span style="color: #2DA239">{{invite.projectName}} <b style="color: #333;font-weight: normal">并成为队长</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reder_zanwu" ng-show="inviteList.length == 0 || inviteList == 'undefined'">
+        <img src="./././img/zanwushuju.png">
+        <h3 style="text-align: center;font-size:16px;">暂无邀请数据</h3>
+      </div>
+    </div>
+
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

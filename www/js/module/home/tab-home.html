@@ -1,0 +1,82 @@
+<ion-view view-title="首页"  >
+  <ion-content >
+  <div class="home-img">
+    <img ng-src="{{userInfo.avatar}}">
+    <ul class="home-ul">
+      <li class="home-ul-li">
+        <p>我的积分</p>
+        <b ng-show="score">{{score}}分</b>
+        <b ng-show="!score">0分</b>
+      </li>
+      <li ng-click="highScore()">
+        <p>我的排名</p>
+        <b ng-show="order">第{{order}}名</b>
+        <b ng-show="!order">暂无排名</b>
+      </li>
+    </ul>
+  </div>
+    <div style="border: 4px solid #F0F0F0"></div>
+    <div class="home-notice" ng-click="JifenDongtai()">
+      <i class="ion-volume-medium"></i>
+      <p ng-show="barrageList.length == 0">提报隐患，换取积分，赢大奖！</p>
+      <div id="Marquee" ng-show="barrageList.length > 0">
+        <p style="width: 100%; height: 36px;" ng-repeat="item in barrageList">
+          <span>{{item.wpname}}通过隐患{{item.tname}}<span ng-show="item.score >= 0">获得</span><span ng-show="item.score < 0">扣除</span><span class="balanced">{{item.score|intervalFilter}}</span></span>积分
+          <!--&nbsp;&nbsp;{{item.createtime|date:"yyyy-MM-dd"}}-->
+        </p>
+      </div>
+      <i class="ion-ios-arrow-right" style="right: 10px;left: auto;"></i>
+    </div>
+    <div style="border: 4px solid #F0F0F0"></div>
+    <div class="home-cont">
+      <div class="home-cont1" ng-click="goYinHuan()">
+        <img src="./././img/cont-01.png" >
+        <p>隐患提报</p>
+        <span>赢取积分</span>
+      </div>
+      <div class="home-cont2">
+        <div class="home-cot2-1" ng-click="Jifen()">
+          <div class="home-ctimg">
+            <img src="./././img/cont-2.png" >
+          </div>
+          <div class="home-ctp">
+            <p>安全积分</p>
+            <span>积分换礼</span>
+          </div>
+        </div>
+        <div class="home-cot2-1 home-cot2-2" ng-click="Genzong()">
+          <div class="home-ctimg">
+            <img src="./././img/cont-3.png" >
+          </div>
+          <div class="home-ctp">
+            <p>隐患跟踪</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="border: 4px solid #F0F0F0"></div>
+    <div class="home-list">
+      <div class="list-h" ng-click="lookAll()">
+        <i></i><h4>安全资讯</h4>
+        <span>查看全部 >></span>
+      </div>
+      <div class="list">
+        <div class="item item-thumbnail-left" ng-click="informationDetail(item.id)" ng-repeat="item in articleList track by $index">
+          <img ng-src="{{item.smeta|httpFilter}}">
+          <h2 ng-bind="item.postTitle"></h2>
+          <p class="hmlist-span" ng-bind="item.postContent | contentFilter"></p>
+          <div class="home-list-2">
+            <span style="text-align: left;">{{item.postDate | date:"yyyy-MM-dd"}}</span>
+            <span><i class="ion-eye detailEye"></i>{{item.readings}}</span>
+            <span><i class="ion-thumbsup detailEye"></i>{{item.postLike}}</span>
+          </div>
+          <i class="ding_img"></i>
+        </div>
+      </div>
+    </div>
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

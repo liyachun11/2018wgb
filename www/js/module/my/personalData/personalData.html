@@ -1,0 +1,136 @@
+<ion-view view-title="个人信息" hide-tabs="true">
+  <ion-nav-bar>
+    <ion-nav-back-button class="button-clear" style="color: #333;" ng-click="goBackBtn()">
+      <i class="ion-chevron-left"></i> 返回
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-nav-buttons side="right" >
+    <button class="button " ng-click="modify()" ng-if="modifyBut"  style="color: #33cd5f;border: 0;font-size: 15px;">
+      <span  >修改</span>
+    </button>
+    <button class="button " ng-click="saveBtn()" ng-if="!modifyBut"  style="color: #33cd5f;border: 0;font-size: 15px;">
+      <span >保存</span>
+    </button>
+  </ion-nav-buttons>
+  <ion-content >
+    <div class="list listStyle" ng-click="roleDate()">
+      <div class="item item-thumbnail-right tabMy personalBox" >
+        <img ng-src="{{userInfo.avatar}}">
+        <h2 ng-bind="userInfo.name"></h2>
+        <h2 ng-show="userInfo.name == '' || userInfo.name == null">&nbsp;</h2>
+      </div>
+    </div>
+    <div style="border: 4px solid #F0F0F0"></div>
+    <div class="list">
+      <div class="list_padding">
+        <div class="item personalBox2">
+          昵称
+          <span style="float: right" ng-bind="userInfo.userNicename"></span>
+        </div>
+        <div class="item personalBox2">
+          姓名
+          <span style="float: right" ng-bind="userInfo.name"></span>
+        </div>
+        <div class="item personalBox2">
+          政治面貌
+          <div class="information-tier personalBox3 personalBox3-1" >
+            <select ng-options="list.id as list.name for list in informList" ng-model="userInfo.politicalStatus" ng-disabled="ngSelecte"></select>
+            <i class="ion-ios-arrow-right"></i>
+          </div>
+        </div>
+        <div class="item personalBox2">
+          性别
+          <div class="information-tier personalBox3 personalBox3-1" >
+            <select ng-options="list.id as list.gender for list in genderList" ng-model="userInfo.sex" ng-disabled="ngSelecte"></select>
+            <i class="ion-ios-arrow-right"></i>
+          </div>
+        </div>
+        <div class="item personalBox2 button ngDisabled_item" style="border: 0;" ng-click="iphoneBtn()"  ng-disabled="ngSelecte">
+          <span style="float: left;color: #333;">手机号</span>
+          <div class="personalBox4" style="float: right;color: #333;">
+            <span>{{userInfo.mobile}}</span><i class="ion-ios-arrow-right"></i></div>
+          </div>
+      </div>
+      <div style="border: 4px solid #F0F0F0"></div>
+      <div class="list_padding">
+        <div class="item personalBox2  button ngDisabled_item" style="border: 0;" ng-click="workTypeBtn()" ng-disabled="ngSelecte">
+          <span style="float: left;color: #333;">工种</span>
+          <div class="personalBox4" style="float: right;color: #333;">
+            <span ng-show="userInfo.workType == null">未绑定工种</span>
+            <span ng-show="userInfo.workType != null">{{userInfo.workType.name}}</span>
+            <i class="ion-ios-arrow-right"></i>
+          </div>
+        </div>
+        <div class="item personalBox2" style="border :0;border-top: 1px solid #ddd;">
+          工作状态
+          <span style="float: right;color: green;" ng-show="userInfo.workStatus == 0 || userInfo.workStatus == null">待业中</span>
+          <span style="float: right;color: red;" ng-show="userInfo.workStatus == 1">工作中</span>
+        </div>
+      </div>
+
+      <div style="border: 4px solid #F0F0F0"></div>
+      <div class="list_padding">
+        <div class="item personalBox2">
+          所在地
+          <div class="information-tier personalBox3 personalBox3-3" style="right: 120px">
+            <select ng-options="item.id as item.namecn for item in provinceList" ng-model="region1.provinceId" ng-disabled="ngSelecte">
+              <option value="">请选择</option>
+            </select>
+            <i class="ion-arrow-down-b"></i>
+          </div>
+          <div class="information-tier personalBox3 personalBox3-3" ng-show="cityTempList1.length > 0">
+            <select ng-options="item.id as item.namecn for item in cityTempList1" ng-model="region1.cityId">
+              <option value="">请选择市</option>
+            </select>
+            <i class="ion-arrow-down-b"></i>
+          </div>
+        </div>
+        <div class="item personalBox2" style="border: 0;">
+          服务地区
+          <div class="information-tier personalBox3 personalBox3-3" style="right: 120px">
+            <select ng-options="item.id as item.namecn for item in provinceList" ng-model="region2.provinceId" ng-disabled="ngSelecte">
+              <option value="">请选择</option>
+            </select>
+            <i class="ion-arrow-down-b"></i>
+          </div>
+          <div class="information-tier personalBox3 personalBox3-3" ng-show="cityTempList2.length > 0">
+            <select ng-options="item.id as item.namecn for item in cityTempList2" ng-model="region2.cityId">
+              <option value="">请选择市</option>
+            </select>
+            <i class="ion-arrow-down-b"></i>
+          </div>
+        </div>
+      </div>
+
+
+      <!--<div style="border: 4px solid #F0F0F0"></div>-->
+
+    </div>
+  </ion-content>
+  <!--<ion-footer-bar>-->
+    <!--<button class="button button-balanced sublime-btn" ng-click="saveBtn()">保存</button>-->
+  <!--</ion-footer-bar>-->
+
+  <script id="useAgreement.html" type="text/ng-template">
+    <form class="loginFrom">
+      <ion-list>
+        <ion-item class="login">
+          <div class="login-add">
+            <span>手机号</span>
+            <input type="tel" name="phoneNum" style="width: 70%" placeholder="请输入手机号" ng-model="verificationInfo.telephone"/>
+          </div>
+        </ion-item>
+        <ion-item class="login">
+          <div class="login-add login-add2">
+            <span>验证码</span>
+            <input type="tel" name="phoneCode" size="6" placeholder="短信验证码" ng-model="verificationInfo.code"/>
+            <div class="login-add3 button button-outline button-balanced" ng-click="verification()" ng-disabled="flag">{{paracont}}</div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </form>
+  </script>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

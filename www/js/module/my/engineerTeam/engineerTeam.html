@@ -1,0 +1,57 @@
+<ion-view view-title="工程队" style="background-color: #EEEEEE">
+  <ion-nav-buttons side="right" >
+    <button class="button "  ng-click="applyEngineerTeam()"  style="color: #33cd5f;border: 0;font-size: 15px;">
+      <span>申请</span>
+    </button>
+  </ion-nav-buttons>
+  <div class="bar bar-subheader"  ng-show="projectTeamList.length > 0">
+    <div class="information-tier engineerTeam-tierss" style="width: 94%;border: 0;padding: 0;right: auto;left: 10px;">
+      <select ng-options="list.projectteamId as list.name for list in projectTeamList" style="line-height: 32px;" ng-model="projectInfo.projectteamid"></select>
+      <i class="ion-ios-arrow-down"></i>
+    </div>
+  </div>
+  <ion-content class="has-subheader ">
+    <div class="list listStyle" ng-show="projectTeamList.length > 0">
+      <div class="item personalBox2 mySkills engineerTeam4" ng-click="engineerTeamDetail()">
+        工程队详情
+        <i class="icon ion-ios-arrow-right "></i>
+      </div>
+      <div class="item item-button-right" style="background-color: #EEEEEE;padding: 12px 10px" ng-show="userInfo.id == project.projectUserId && project.workstate != 4">
+        班组
+        <button class="button button-balanced button-small" ng-click="addEngineerTeam()" style="font-size: 13px;min-height: 25px;line-height: 25px;top: 7px;right: 10px;">
+          创建
+        </button>
+      </div>
+      <div class="item item-button-right" style="background-color: #EEEEEE;padding: 12px 10px" ng-show="userInfo.id != project.projectUserId && isHint">
+        <span style="color: red; font-size: 14px;">您不是该工程队队长，没有权限创建班组</span>
+      </div>
+    </div>
+    <div class="engineerTeam3" ng-click="teamDetailList(item.group.id,item.group.name)" ng-repeat="item in groupList track by $index">
+        <div class="list listStyle">
+          <div class="item item-avatar item-avatar-gcd">
+            <img ng-src="{{item.user.avatar}}">
+            <h2 ng-bind="item.group.name"></h2>
+            <p>人数: <span ng-bind="item.group.num"></span></p>
+          </div>
+        </div>
+      <div class="engineerTeam2-ov">
+        <div class="engineerTeam2-left">
+          <span ng-bind="item.user.userLogin"></span><span style="margin-left: 10px;">{{item.user.mobile}}</span>
+        </div>
+        <div class="engineerTeam2-right">{{item.group.createDate | date:"yyyy-MM-dd"}}</div>
+      </div>
+    </div>
+
+    <div class="reder_zanwu" ng-show="groupList.length == 0">
+      <img src="./././img/zanwushuju.png">
+      <h3 style="text-align: center;font-size:16px;">暂无数据</h3>
+    </div>
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+  <!--<ion-footer-bar>-->
+    <!--<div class="button button-balanced sublime-btn" ng-click="applyEngineerTeam()"><span>申请工程队</span></div>-->
+  <!--</ion-footer-bar>-->
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

@@ -1,0 +1,41 @@
+<ion-view view-title="身份转让与授权" >
+  <div class="bar bar-subheader" style="background-color: #EEEEEE">
+    <div class="mem-search">
+      <input type="text" placeholder="输入姓名/手机号搜索" id="key_word" ng-model="searchInfo.phoneAndName" ng-change="changeSearchInfo()">
+      <i class="ion-search" ng-click="searchUsers()"></i>
+    </div>
+  </div>
+  <ion-content class="has-subheader">
+    <div class="list">
+      <div class="item item-avatar" ng-show="!isSearch" ng-repeat="userInfo in userInfoList track by $index" ng-click="transfer(userInfo)">
+        <img ng-src="{{userInfo.avatar}}">
+        <h2 style="line-height: 40px;" ng-bind="userInfo.name"></h2>
+        <div class="captainChange">
+          <span ng-bind="userInfo.workType.name"></span>
+          <a href="tel:{{userInfo.mobile}}" ng-click="call($event)"><i class="ion-android-call"></i></a>
+        </div>
+      </div>
+      <div class="item item-avatar" ng-show="isSearch" ng-repeat="userInfo in userInfoTempList track by $index" ng-click="transfer(userInfo)">
+        <img ng-src="{{userInfo.avatar}}">
+        <h2 style="line-height: 40px;" ng-bind="userInfo.name"></h2>
+        <div class="captainChange">
+          <span ng-bind="userInfo.workType.name"></span>
+          <a href="tel:{{userInfo.mobile}}"><i class="ion-android-call"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="reder_zanwu" ng-show="userInfoList.length == 0 && !isSearch">
+      <img src="./././img/zanwushuju.png">
+      <h3 style="text-align: center;font-size:16px;">暂无数据</h3>
+    </div>
+    <div class="reder_zanwu" ng-show="userInfoTempList.length == 0 && isSearch">
+      <img src="./././img/zanwushuju.png">
+      <h3 style="text-align: center;font-size:16px;">暂无搜索数据</h3>
+    </div>
+    <!--上拉加载-->
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

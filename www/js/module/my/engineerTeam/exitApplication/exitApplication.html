@@ -1,0 +1,64 @@
+<ion-view view-title="移除成员" style="background-color: #EEEEEE">
+  <div class="bar bar-subheader" style="background-color: #EEEEEE">
+    <div class="mem-search">
+      <input type="text" placeholder="请输入姓名或手机号搜索" id="key_word" ng-model="searchInfo.phoneAndName" ng-change="changeSearchInfo()">
+      <i class="ion-search" ng-click="searchUsers()"></i>
+    </div>
+  </div>
+  <ion-content class="has-subheader">
+    <div class="list">
+      <div class="item carInput carInput1" style="margin-bottom: 10px;">
+        <span>退场日期 <b style="font-size: 12px;color: red;font-weight: normal">(必填)</b></span>
+        <input type="text" ng-model="first_register_date" placeholder="请选择日期">
+        <ionic-datepicker class="timeDate_box" idate="currentDate" callback="datePickerCallback_firstDate" title="dateTitle">
+          <button class="button button-small button-positive"> {{ carInfo.registerTime }} </button>
+        </ionic-datepicker>
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+
+      <div class="item item-checkbox deleteMember exitApplication"  ng-show="!isSearch" ng-repeat="userInfo in userInfoList track by $index">
+        <label class="checkbox">
+          <input type="checkbox" name="chkItem" ng-value="userInfo.id" ng-click="changeChecked()">
+        </label>
+        <img ng-src="{{userInfo.avatar}}">
+        <div style="width: 78%;" class="deleteMember2">
+          <h2 ng-bind="userInfo.name"></h2>
+          <p ng-bind="userInfo.mobile"></p>
+        </div>
+        <div class="captainChange" ng-show="captainId == userInfo.id">
+          <span class="memberList1 memberList1-act">队长</span>
+        </div>
+      </div>
+      <div class="item item-checkbox deleteMember exitApplication"  ng-show="isSearch" ng-repeat="userInfo in userInfoTempList track by $index">
+        <label class="checkbox">
+          <input type="checkbox" name="chkItem2" ng-value="userInfo.id" ng-click="changeChecked()">
+        </label>
+        <img ng-src="{{userInfo.avatar}}">
+        <div style="width: 78%;" class="deleteMember2">
+          <h2 ng-bind="userInfo.name"></h2>
+          <p ng-bind="userInfo.mobile"></p>
+        </div>
+        <div class="captainChange" ng-show="captainId == userInfo.id">
+          <span class="memberList1 memberList1-act">队长</span>
+        </div>
+      </div>
+      <div class="reder_zanwu" ng-show="userInfoList.length == 0 && !isSearch">
+        <img src="./././img/zanwushuju.png">
+        <h3 style="text-align: center;font-size:16px;">暂无数据</h3>
+      </div>
+      <div class="reder_zanwu" ng-show="userInfoTempList.length == 0 && isSearch">
+        <img src="./././img/zanwushuju.png">
+        <h3 style="text-align: center;font-size:16px;">暂无搜索数据</h3>
+      </div>
+
+    </div>
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+  <!--上拉加载-->
+  <ion-footer-bar>
+    <button  class="button button-balanced sublime-btn" ng-click="deleteOk()">确认({{deleteList.length}})</button>
+  </ion-footer-bar>
+</ion-view>
+
+

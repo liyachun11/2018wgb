@@ -1,0 +1,64 @@
+<ion-view view-title="成员信息" >
+  <ion-content >
+    <div class="list listStyle">
+      <div class="item item-thumbnail-right tabMy personalBox" >
+        <img ng-src="{{userInfo.avatar}}">
+        <h2 ng-bind="userInfo.name"></h2>
+        <h2 ng-show="userInfo.name == '' || userInfo.name == null">&nbsp;</h2>
+      </div>
+    </div>
+    <div style="border: 4px solid #F0F0F0"></div>
+    <div class="list listStyle">
+      <div class="item personalBox2">
+        昵称
+        <span style="float: right" ng-bind="userInfo.userNicename"></span>
+      </div>
+      <div class="item personalBox2">
+        姓名
+        <span style="float: right" ng-bind="userInfo.name"></span>
+      </div>
+      <div class="item personalBox2">
+        政治面貌
+        <div class="information-tier personalBox3 personalBox3-1" >
+          <select ng-options="list.id as list.name for list in informList" ng-model="userInfo.politicalStatus" disabled="disabled" class="memberData"></select>
+        </div>
+      </div>
+      <div class="item personalBox2">
+        性别
+        <div class="information-tier personalBox3 personalBox3-1" >
+          <select ng-options="list.id as list.gender for list in genderList" ng-model="userInfo.sex" disabled="disabled" class="memberData"></select>
+        </div>
+      </div>
+      <div class="item personalBox2">
+        手机号
+        <div class="personalBox4" style="float: right">
+          <span>{{userInfo.mobile}}</span></div>
+      </div>
+      </div>
+      <div style="border: 4px solid #F0F0F0"></div>
+      <div class="item personalBox2 ">
+        工种
+        <span style="float: right" ng-bind="userInfo.workType.name"></span>
+      </div>
+      <div class="item personalBox2">
+        工作状态
+        <span style="float: right;color: green;" ng-show="userInfo.workStatus == 0">待业中</span>
+        <span style="float: right;color: red;" ng-show="userInfo.workStatus == 1">工作中</span>
+      </div>
+      <div style="border: 4px solid #F0F0F0"></div>
+      <div class="item personalBox2">
+        所在地
+        <span style="float: right">{{userInfo.locationProvinceName}}&nbsp;{{userInfo.locationCityName}}</span>
+      </div>
+      <div class="item personalBox2">
+        服务地区
+        <span style="float: right">{{userInfo.serviceProvinceName}}&nbsp;{{userInfo.serviceCityName}}</span>
+      </div>
+    </div>
+  </ion-content>
+
+
+
+</ion-view>
+
+

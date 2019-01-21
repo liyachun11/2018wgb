@@ -1,0 +1,22 @@
+<ion-view view-title="资讯详情">
+  <ion-content class="padding">
+    <div class="article-top">
+      <div class="article-title">
+        <h3 ng-bind="articleInfo.postTitle"></h3>
+      </div>
+      <div class="article-info">
+        <ul>
+          <li><span><i class="ion-eye detailEye"></i>{{articleInfo.readings}}</span></li>
+          <li><span><i class="ion-thumbsup detailEye"></i>{{articleInfo.postLike}}</span></li>
+          <li >发布于 <span>{{articleInfo.postDate | date:"yyyy-MM-dd"}}</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="article-content" ng-bind-html="articleInfo.postContent | trustHtml"></div>
+    <div class="article-bottom">
+      <img ng-show="!articleInfo.likeCount" src="./././img/dianzan-02.png" alt="" ng-click="goLike()">
+      <img ng-show="articleInfo.likeCount" src="./././img/dianzan-03.png" ng-click="goLike()">
+    </div>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>

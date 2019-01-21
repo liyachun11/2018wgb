@@ -1,0 +1,24 @@
+<ion-view view-title="添加班组">
+  <ion-content >
+    <div class="list listStyle">
+      <div class="item carInput  carInput2">
+        <span>班组名称</span>
+        <input type="text" placeholder="班组名称" ng-model="groupInfo.name" maxlength="40">
+      </div>
+      <!--<div class="item carInput carInput1" ng-click="addMemberList()">-->
+        <!--<span>添加成员</span>-->
+        <!--<div class="captainChange2">-->
+          <!--<span>20</span>-->
+          <!--<i class="ion-ios-arrow-right"></i>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+
+  </ion-content>
+  <ion-footer-bar>
+    <div class="button button-balanced sublime-btn" ng-click="addGroup()"><span>提交</span></div>
+  </ion-footer-bar>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

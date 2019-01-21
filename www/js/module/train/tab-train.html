@@ -1,0 +1,24 @@
+<ion-view view-title="教育培训" style="background-color: #EEEEEE">
+  <div class="bar bar-subheader">
+    <div class="information-tier information-tierp-p" style="border: 0;padding: 0;left: 10px;">
+      <select ng-options="list.projectteamId as list.name for list in projectTeamList" ng-model="projectInfo.projectteamid"></select>
+      <i class="ion-ios-arrow-down"></i>
+    </div>
+  </div>
+  <ion-content style="margin-top: 8px; ">
+    <div class="list listStyle bar-subheader">
+      <div class="item personalBox2 mySkills" ng-click="myTrainRecord()">
+        我的培训记录
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+      <div class="item personalBox2 mySkills" ng-repeat="item in groupList track by $index" ng-click="teamDetailList(item.group.id,item.user.id)">
+        {{item.group.name}}
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+    </div>
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

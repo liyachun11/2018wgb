@@ -1,0 +1,36 @@
+<ion-view view-title="安全资讯"  >
+<div class="bar bar-subheader">
+  <span class="information-tierspan">请选择分类</span>
+  <div class="information-tier information-tierp-p">
+    <select ng-options="list.id as list.name for list in informList" ng-model="categoryId" ng-change="changeCategory()">
+      <option value="">全部</option>
+    </select>
+    <i class="ion-ios-arrow-down"></i>
+  </div>
+</div>
+  <ion-content class="has-subheader">
+    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    <div class="home-list">
+      <div class="list">
+        <div class="item item-thumbnail-left" ng-click="informationDetail(item.id)" ng-repeat="item in articleList track by $index">
+          <img ng-src="{{item.smeta|httpFilter}}">
+          <h2 ng-bind="item.postTitle"></h2>
+          <p class="hmlist-span" ng-bind="item.postContent | contentFilter"></p>
+          <div class="home-list-2">
+            <span style="text-align: left;">{{item.postDate | date:"yyyy-MM-dd"}}</span>
+            <span><i class="ion-eye detailEye"></i>{{item.readings}}</span>
+            <span><i class="ion-thumbsup detailEye"></i>{{item.postLike}}</span>
+          </div>
+        </div>
+        <div class="reder_zanwu" ng-show="articleList.length == 0">
+          <img src="./././img/zanwushuju.png">
+          <h3 style="text-align: center;font-size:16px;">暂无数据</h3>
+        </div>
+      </div>
+    </div>
+    <!--上拉加载-->
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+</ion-view>
+
+

@@ -1,0 +1,33 @@
+<ion-view view-title="添加成员" >
+  <div class="bar bar-subheader" style="background-color: #EEEEEE">
+    <div class="mem-search">
+      <input type="text" placeholder="请输入姓名/手机号搜索" id="key_word" ng-model="searchInfo.phoneAndName">
+      <i class="ion-search" ng-click="searchUsers()"></i>
+    </div>
+  </div>
+  <ion-content class="has-subheader">
+    <div class="list">
+      <div class="item item-avatar" ng-repeat="userInfo in userInfoList track by $index">
+        <img ng-src="{{userInfo.avatar}}">
+        <div style="width: 78%;">
+          <h2 ng-bind="userInfo.name"></h2>
+          <p ng-bind="userInfo.mobile"></p>
+        </div>
+        <div class="captainChange">
+          <span class="memberList1" ng-click="addInvitations(userInfo)" ng-show="userInfo.response == null || userInfo.response == 'undefined' || userInfo.response == 2">邀请</span>
+          <span class="memberList1" style="background: #3EA949;" ng-show="userInfo.response == 0">邀请中</span>
+          <span class="memberList1" style="color: #33cd5f; background-color: #fff; border: 1px solid #33cd5f;" ng-show="userInfo.response == 1">已入团</span>
+        </div>
+      </div>
+      <div class="reder_zanwu" ng-show="userInfoList.length == 0 || userInfoList == 'undefined'">
+        <img src="./././img/zanwushuju.png">
+        <h3 style="text-align: center;font-size:16px;">暂无搜索数据</h3>
+      </div>
+    </div>
+    <!--上拉加载-->
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

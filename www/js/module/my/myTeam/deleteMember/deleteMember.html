@@ -1,0 +1,53 @@
+<ion-view view-title="移除成员" >
+  <div class="bar bar-subheader" style="background-color: #EEEEEE">
+    <div class="mem-search">
+      <input type="text" placeholder="请输入姓名或手机号搜索" id="key_word" ng-model="searchInfo.phoneAndName" ng-change="changeSearchInfo()">
+      <i class="ion-search" ng-click="searchUsers()"></i>
+    </div>
+  </div>
+  <ion-content class="has-subheader">
+    <div class="item item-checkbox deleteMember"  ng-show="!isSearch" ng-repeat="userInfo in userInfoList track by $index">
+      <label class="checkbox">
+        <input type="checkbox" name="chkItem" ng-value="userInfo.id" ng-click="changeChecked()">
+      </label>
+      <img ng-src="{{userInfo.avatar}}">
+      <div style="width: 78%;" class="deleteMember2">
+        <h2 ng-bind="userInfo.name"></h2>
+        <p ng-bind="userInfo.mobile"></p>
+      </div>
+      <div class="captainChange" ng-show="captainId == userInfo.id">
+        <span class="memberList1 memberList1-act">队长</span>
+      </div>
+    </div>
+    <div class="item item-checkbox deleteMember"  ng-show="isSearch" ng-repeat="userInfo in userInfoTempList track by $index">
+      <label class="checkbox">
+        <input type="checkbox" name="chkItem2" ng-value="userInfo.id" ng-click="changeChecked()">
+      </label>
+      <img ng-src="{{userInfo.avatar}}">
+      <div style="width: 78%;" class="deleteMember2">
+        <h2 ng-bind="userInfo.name"></h2>
+        <p ng-bind="userInfo.mobile"></p>
+      </div>
+      <div class="captainChange" ng-show="captainId == userInfo.id">
+        <span class="memberList1 memberList1-act">队长</span>
+      </div>
+    </div>
+    <div class="reder_zanwu" ng-show="userInfoList.length == 0 && !isSearch">
+      <img src="./././img/zanwushuju.png">
+      <h3 style="text-align: center;font-size:16px;">暂无数据</h3>
+    </div>
+    <div class="reder_zanwu" ng-show="userInfoTempList.length == 0 && isSearch">
+      <img src="./././img/zanwushuju.png">
+      <h3 style="text-align: center;font-size:16px;">暂无搜索数据</h3>
+    </div>
+    <!--上拉加载-->
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+  <ion-footer-bar>
+    <button ng-hide="userInfoList.length == 0 || userInfoList == 'undefined'" class="button button-balanced sublime-btn" ng-click="deleteOk()">确认({{deleteList.length}})</button>
+  </ion-footer-bar>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+
+</ion-view>
+
+

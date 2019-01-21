@@ -1,0 +1,92 @@
+<ion-view view-title="工程队申请" style="background-color: #EEEEEE" cache-view="false">
+  <div class="bar bar-subheader tabApplyBox">
+    <div class="tabApply tabApply2" ng-class="{'appActive': istab1}" ng-click="tabApply(1)">工程队申请</div>
+    <div class="tabApply" ng-class="{'appActive': istab2}" ng-click="tabApply(2)">申请记录</div>
+  </div>
+  <ion-content class="has-subheader">
+    <div class="tabApply1-cont" ng-show="applyCont1">
+      <div class="item-input-inset  tabApply1-cont1">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios-search placeholder-icon"></i>
+          <input type="search" placeholder="输入工程名称" ng-model="projectInfo.name">
+        </label>
+        <!--<button class="button button-small ion-qr-scanner" style="font-size: 20px;color: #2DA239"></button>-->
+      </div>
+      <div class="list">
+        <div class="item personalBox2 applyCont-item">
+          所在地
+          <div class="information-tier personalBox3 personalBox3-3" style="right: 155px">
+            <select ng-options="item.id as item.namecn for item in projectInfo.provinceList" ng-model="projectInfo.province">
+              <option value="">全部</option>
+            </select>
+            <i class="ion-arrow-down-b"></i>
+          </div>
+          <div class="information-tier personalBox3 personalBox3-3" style="right: 46px" >
+            <select ng-options="item.id as item.namecn for item in projectInfo.cityTempList" ng-model="projectInfo.city">
+              <option value="">全部</option>
+            </select>
+            <i class="ion-arrow-down-b"></i>
+          </div>
+          <div class="information-tier personalBox3 " >
+            <button class="button button-small button-balanced" style="line-height: 24px;" ng-click="searchProject()" ng-disabled="!projectInfo.isSearch">搜索</button>
+          </div>
+        </div>
+        <div class="item personalBox2 applyCont-item applyCont1-item engTem_div" ng-repeat="project in projectList track by $index" >
+          <div class="engTem_div2" ng-click="applyEngineerDetail(project.projectteamId, project.workstate,project.city.name, project.city.id)">
+            <div class="engTem_tp">{{project.name | substring}}</div>
+            <p ng-bind="project.name"></p>
+          </div>
+         <span class="engTem_spans" style="padding: 2px 9px;" ng-click="invitationProject(project)" ng-hide="project.workstate == 2 || project.workstate == 3 || project.workstate == 4 || project.workstate == 6">申 请</span>
+          <span class="engTem_spans" style="color: #33cd5f; background-color: #fff; border: 1px solid #33cd5f;" ng-show="project.workstate == 2">有队长</span>
+          <span class="engTem_spans" style="color: #9E9698; background-color: #fff; border: 1px solid #9E9698;" ng-show="project.workstate == 3">已邀请</span>
+          <span class="engTem_spans" style="color: #9E9698; background-color: #fff; border: 1px solid #9E9698;" ng-show="project.workstate == 4">已完工</span>
+          <span class="engTem_spans" style="color: #ff0000; background-color: #fff; border: 1px solid red;" ng-show="project.workstate == 6">申请中</span>
+        </div>
+        <div class="reder_zanwu" ng-show="projectList.length == 0">
+          <img src="./././img/zanwushuju.png">
+          <h3 style="text-align: center;font-size:16px;">暂无数据</h3>
+        </div>
+      </div>
+    </div>
+    <div class="tabApply2-cont" ng-show="applyCont2">
+      <div class="myTeam applyEnginerrList" ng-repeat="invitation in invitationList track by $index">
+      <div class="myTeam-1 myTeam2 applyEnginerr">
+        <h5 style="margin-top: 0;" ng-bind="invitation.engTeamDetail.name"></h5>
+        <div class="applyEnginerrBox">
+          <div class="myTeam-img">
+            <img src="./././img/06.jpg" >
+          </div>
+          <div class="myTeam-p">
+            <div class="myTeam-p1">
+              <span>地点: {{invitation.engTeamDetail.province.name}}&nbsp;{{invitation.engTeamDetail.city.name}}</span>
+            </div>
+            <div class="myTeam-p1 myTeam-p2">
+              <span class="">人数: {{invitation.engTeamDetail.personno}}人</span>
+            </div>
+            <div class="myTeam-p1 myTeam-p2">
+              <span>时间: {{invitation.engTeamDetail.planstarttime  | date:"yyyy-MM-dd"}}—{{invitation.engTeamDetail.planendtime  | date:"yyyy-MM-dd"}}</span>
+            </div>
+          </div>
+        </div>
+        <span class="myTeam-span myTeam-span2 apply-spanbox myTeam-span2-2" ng-show="invitation.response == 0">审核中</span>
+        <span class="myTeam-span myTeam-span2 apply-spanbox" style="color: #2DA239;border: 1px solid #2DA239;background-color: #fff;" ng-show="invitation.response == 1">已通过</span>
+        <span class="myTeam-span myTeam-span2 apply-spanbox myTeam-span2-1" style="color: #959696;border: 1px solid #959696;background-color: #fff;" ng-show="invitation.response == 2">被驳回</span>
+      </div>
+      <div class="applyEnginerr2">
+        <a href="tel:{{invitation.engTeamDetail.phone}}" style="color: black;"><div class="applyEnginerr2_left"><i class="ion-ios-telephone"></i>{{invitation.engTeamDetail.leaderName}}</div></a>
+        <div class="applyEnginerr2_right">{{invitation.createDate | date:"yyyy-MM-dd"}}</div>
+      </div>
+    </div>
+      <div class="reder_zanwu" ng-show="invitationList.length == 0">
+        <img src="./././img/zanwushuju.png">
+        <h3 style="text-align: center;font-size:16px;">暂无数据</h3>
+      </div>
+    </div>
+
+    <!--上拉加载-->
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+
+</ion-view>
+
+

@@ -1,0 +1,48 @@
+<ion-view view-title="团队详情" style="background-color: #EEEEEE">
+  <ion-nav-buttons side="right">
+    <button class="button " ng-click="modify()" ng-if="modifyBut"  style="color: #33cd5f;border: 0;font-size: 15px;" ng-show="userInfo.id == teamDetail.captain.id">
+      <span  >修改</span>
+    </button>
+    <button class="button " ng-click="updateTeam()" ng-if="!modifyBut"  style="color: #33cd5f;border: 0;font-size: 15px;" ng-show="userInfo.id == teamDetail.captain.id">
+      <span >保存</span>
+    </button>
+  </ion-nav-buttons>
+  <ion-content >
+    <div class="list listStyle">
+      <div class="item carInput  carInput2">
+        <span>团队名称</span>
+        <input style="background-color: white;" ng-disabled="ngSelecte" type="text" placeholder="团队名称" ng-model="teamDetail.name" ng-disabled="userInfo.id != teamDetail.captain.id">
+      </div>
+      <div class="item carInput carInput1" ng-click="memberList()">
+        <span>团队成员</span>
+        <div class="captainChange2">
+          <span ng-bind="teamDetail.num"></span>
+          <i class="ion-ios-arrow-right"></i>
+        </div>
+      </div>
+    </div>
+    <h3 class="mySkills-1">团队介绍</h3>
+    <textarea class="addTeam-textarea" style="background-color: #fff;" ng-disabled="ngSelecte" maxlength="200"  ng-model="teamDetail.introduction" placeholder="请输入团队介绍"></textarea>
+    <div class="addTeam-num">
+      <span>{{teamDetail.introduction.length}} / 200</span></span>
+    </div>
+    <!--<p class="myTeamDetail">-->
+      <!--<input style="background-color: white;" type="text" placeholder="团队介绍" ng-model="teamDetail.introduction" ng-disabled="userInfo.id != teamDetail.captain">-->
+    <!--</p>-->
+    <div class="list listStyle" ng-show="userInfo.id == teamDetail.captain.id">
+      <div class="item personalBox2 mySkills" ng-click="teamChange()">
+        队长转让
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+    </div>
+    <div class="myTeamDetailBtns" ng-show="userInfo.id == teamDetail.captain.id">
+      <button class="button button-full button-assertive sublime-btn" ng-click="deleteTeam()">解散团队</button>
+    </div>
+    <div class="myTeamDetailBtns" ng-show="userInfo.id != teamDetail.captain.id">
+      <button class="button button-full button-assertive sublime-btn" ng-click="removeTeam()">退出</button>
+    </div>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+

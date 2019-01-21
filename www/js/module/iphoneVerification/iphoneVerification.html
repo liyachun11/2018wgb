@@ -1,0 +1,25 @@
+<ion-view view-title="手机号验证" hide-tabs="{{isTabs}}" hide-back-button="true">
+  <ion-content >
+    <form class="loginFrom">
+      <ion-list>
+        <ion-item class="login">
+          <div class="login-add">
+            <span>手机号</span>
+            <input type="tel" name="phoneNum" style="width: 70%" placeholder="请输入手机号" ng-model="verificationInfo.telephone" />
+          </div>
+        </ion-item>
+        <ion-item class="login">
+          <div class="login-add login-add2">
+            <span>验证码</span>
+            <input type="tel" name="phoneCode" size="6" placeholder="短信验证码" ng-model="verificationInfo.code"/>
+            <div class="login-add3 button button-outline button-balanced" ng-click="verification()" ng-disabled="flag">{{paracont}}</div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </form>
+    <div style="width: 100%;text-align: center;">
+      <button  class="button button-balanced sublime-btn" style="margin-top: 80px;width: 90%" ng-click="register()">提交</button>
+    </div>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>

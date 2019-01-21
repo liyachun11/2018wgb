@@ -1,0 +1,44 @@
+<ion-view view-title="成员列表">
+  <div class="bar bar-subheader" style="background-color: #EEEEEE">
+    <div class="mem-search">
+      <input type="text" placeholder="输入手机号或姓名搜索" id="key_word" ng-model="searchInfo.phoneAndName" ng-change="changeSearchInfo()">
+      <i class="ion-search" ng-click="searchUsers()"></i>
+    </div>
+  </div>
+  <ion-content class="has-subheader">
+    <div class="list listStyle">
+      <div class="item item-avatar" ng-show="!isSearch" ng-click="memberData(userInfo.id)" ng-repeat="userInfo in userInfoList track by $index">
+        <img ng-src="{{userInfo.avatar}}">
+        <h2 style="line-height: 40px;width: 78%;">
+          <span style="width:72px;display: inline-block;" ng-bind="userInfo.name"></span> <span style="margin-left: 5px;" ng-bind="userInfo.mobile"></span>
+        </h2>
+        <div class="captainChange" ng-show="captainId == userInfo.id">
+          <span class="memberList1 memberList1-act">组长</span>
+        </div>
+      </div>
+      <div class="item item-avatar" ng-show="isSearch" ng-click="memberData(userInfo.id)" ng-repeat="userInfo in userInfoTempList track by $index">
+        <img ng-src="{{userInfo.avatar}}">
+        <h2 style="line-height: 40px;width: 78%;">
+          <span style="width:72px;display: inline-block;" ng-bind="userInfo.name"></span> <span style="margin-left: 5px;" ng-bind="userInfo.mobile"></span>
+        </h2>
+        <div class="captainChange" ng-show="captainId == userInfo.id">
+          <span class="memberList1 memberList1-act">组长</span>
+        </div>
+      </div>
+      <div class="reder_zanwu" ng-show="userInfoList.length == 0 && !isSearch">
+        <img src="./././img/zanwushuju.png">
+        <h3 style="text-align: center;font-size:16px;">暂无数据</h3>
+      </div>
+      <div class="reder_zanwu" ng-show="userInfoTempList.length == 0 && isSearch">
+        <img src="./././img/zanwushuju.png">
+        <h3 style="text-align: center;font-size:16px;">暂无搜索数据</h3>
+      </div>
+    </div>
+    <!--上拉加载-->
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+
+  </ion-content>
+
+</ion-view>
+
+

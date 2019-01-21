@@ -1,0 +1,33 @@
+<ion-view view-title="待加入成员" style="background-color: #EEEEEE">
+  <ion-content>
+    <!--<h3 class="mySkills-1 engineerTeam2" >加入待审核人员</h3>-->
+    <div class="myTeam myTeam2">
+      <div class="myTeam-1" ng-repeat="invitation in invitationList track by $index">
+        <div class="myTeam-img">
+          <img ng-src="{{invitation.respondent.avatar}}" >
+        </div>
+        <div class="myTeam-p">
+          <div class="myTeam-p1">
+            <span ng-bind="invitation.respondent.name"></span>
+            <span class="myTeam-span myTeam-span2 wait" ng-click="deleteUser(invitation)" ng-show="!invitation.delete">移除</span>
+            <span class="myTeam-span myTeam-span2 wait" style="background-color: #9E9698;" ng-show="invitation.delete">已移除</span>
+          </div>
+          <div class="myTeam-p1 myTeam-p2">
+            <span ng-bind="invitation.respondent.mobile"></span>
+            <span class="myTeam-span myTeam-span3">{{invitation.checkinTime | date:"yyyy-MM-dd"}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reder_zanwu" ng-show="invitationList.length == 0 || invitationList == 'undefined'">
+      <img src="./././img/zanwushuju.png">
+      <h3 style="text-align: center;font-size:16px;">暂无数据</h3>
+    </div>
+    <!--上拉加载-->
+    <ion-infinite-scroll ng-if="!domore" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+
+</ion-view>
+
+

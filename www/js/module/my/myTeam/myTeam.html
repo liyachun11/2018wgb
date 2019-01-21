@@ -1,0 +1,38 @@
+<ion-view view-title="我的团队" style="background-color: #EEEEEE">
+  <div class="list listStyle bar-subheader">
+    <div class="item personalBox2 mySkills" ng-click="addTeam()">
+      创建团队
+      <i class="icon ion-ios-arrow-right"></i>
+    </div>
+  </div>
+  <ion-content class="has-subheader" style="top:99px;">
+    <div class="myTeam" ng-click="myTeamDetail(item.id)" ng-repeat="item in teamList track by $index">
+      <div class="myTeam-1">
+        <div class="myTeam-img">
+          <img ng-src="{{item.captain.avatar}}">
+        </div>
+        <div class="myTeam-p">
+          <div class="myTeam-p1">
+            <span ng-bind="item.name"></span>
+            <span class="myTeam-span" ng-bind="item.captain.name"></span>
+          </div>
+          <div class="myTeam-p1 myTeam-p2">
+            <span>{{item.num}}人</span>
+            <span class="myTeam-span" ng-bind="item.captain.mobile"></span>
+          </div>
+        </div>
+      </div>
+      <div class="myTeam-tiem">
+        <!--<span style="margin-right: 10px;">邀请码:<i class="balanced">{{item.joinCode}}</i></span>-->
+        <span>{{item.createDate | date:"yyyy-MM-dd"}}</span>
+      </div>
+    </div>
+    <div class="reder_zanwu" ng-show="teamList.length == 0">
+      <img src="./././img/zanwushuju.png">
+      <h3 style="text-align: center;font-size:16px;">暂无团队</h3>
+    </div>
+  </ion-content>
+  <div ng-include="'toast.html'" ng-class="toastClass"></div>
+</ion-view>
+
+
