@@ -1,1 +1,1 @@
- §∂‡∏∫…Ÿ
+cat reset hard HEAD^
