@@ -1,1 +1,2 @@
-cat reset hard HEAD^
+cat reset hard HEAD
+jiushi xiang xiugai 
