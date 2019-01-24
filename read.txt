@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 dev4
+=======
+cat reset hard HEAD
+jiushi xiang xiugai 
+>>>>>>> 189053cc558062606463f80d5774789a4be15aa4
