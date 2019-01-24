@@ -1,1 +1,6 @@
-cccccccccccccccccccccccccccccccccccZZ
+
+ccccccccccccccccccZZ
+dev4
+cat reset hard HEAD
+jiushi xiang xiugai 
+
